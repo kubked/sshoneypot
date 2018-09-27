@@ -1,0 +1,10 @@
+# pycharm generated files
+venv/
+.idea
+
+# ssh_key dir
+ssh_key/
+
+# bytecoded python files
+*.pyc
+
