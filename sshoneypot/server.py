@@ -14,13 +14,19 @@ class SSHPlayerServer(asyncssh.SSHServer):
         process.stdout.write('\e[8;50;100t')
         while i < 1000:
             c = Canvas()
+            visible = False
+
+            if b'' == await process.stdin.read(1):
+                visible = True
+
 
             process.stdout.write('\033[2J')
             process.stdout.write("\033[?25l")
 
-            for i in range(pos[0], pos[0] + 10):
-                for j in range(pos[1], pos[1] + 10):
-                    c.set(i % 80 - 40, j % 60 - 30)
+            if visible:
+                for i in range(pos[0], pos[0] + 10):
+                    for j in range(pos[1], pos[1] + 10):
+                        c.set(i % 80 - 40, j % 60 - 30)
 
             process.stdout.write(c.frame(-40, -30, 40, 30))
 
